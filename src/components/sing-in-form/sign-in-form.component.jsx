@@ -10,6 +10,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 import "./sign-in-form.styles.scss";
+import Swal from "sweetalert2";
 
 const defaultFormFields = {
   email: "",
@@ -42,10 +43,20 @@ const SingInForm = () => {
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
-          alert("incorrect password for email");
+          Swal.fire({
+            title: "Warning!",
+            text: "incorrect password for email",
+            icon: "warning",
+            confirmButtonText: "Back",
+          });
           break;
         case "auth/user-not-found":
-          alert("no user associated with this email");
+          Swal.fire({
+            title: "Warning!",
+            text: "no user associated with this email",
+            icon: "warning",
+            confirmButtonText: "Back",
+          });
           break;
         default:
           console.log(error);

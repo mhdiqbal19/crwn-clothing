@@ -7,6 +7,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+import Swal from "sweetalert2";
 
 const defaultFormFields = {
   displayName: "",
@@ -27,7 +28,15 @@ const SignUpForm = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("passwords do not match");
+      Swal.fire({
+        text: "passwords do not match",
+        target: "#custom-target",
+        customClass: {
+          container: "position-absolute",
+        },
+        toast: true,
+        position: "top-right",
+      });
       return;
     }
 
@@ -41,7 +50,12 @@ const SignUpForm = () => {
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Cannot create user, email already in use");
+        Swal.fire({
+          title: "Warning!",
+          text: "Cannot create user, email already in use",
+          icon: "warning",
+          confirmButtonText: "Back",
+        });
       } else {
         console.log("user creation encountered an error", error);
       }
