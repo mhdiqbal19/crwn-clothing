@@ -1,15 +1,17 @@
 .cart-dropdown-container {
   position: absolute;
-  width: 240px;
-  height: 340px;
+  width: 300px;
+  height: 380px;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid rgb(61, 55, 55);
   background-color: white;
   top: 90px;
   right: 40px;
   z-index: 5;
+  border-radius: 5px;
+
 
   .empty-message {
     font-size: 18px;
@@ -17,10 +19,11 @@
   }
 
   .cart-items {
-    height: 240px;
+    height: 270px;
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    overflow-x: hidden; /* Sembunyikan vertical scrollbar */
   }
 
   button {

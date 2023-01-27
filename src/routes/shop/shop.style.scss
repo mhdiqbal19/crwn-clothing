@@ -1,6 +1,7 @@
 .product-container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    columns: 10px;
+    gap: 20px;
     row-gap: 50px;
+    
 }
