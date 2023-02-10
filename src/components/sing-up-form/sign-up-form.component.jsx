@@ -1,13 +1,14 @@
 import { useState } from "react";
-import "./sign-up-form.styles.scss";
-import Button from "../button/button.component";
+
 import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Swal from "sweetalert2";
+
+import { SignUpContainer } from "./sign-up-form.styles";
 
 const defaultFormFields = {
   displayName: "",
@@ -28,15 +29,7 @@ const SignUpForm = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      Swal.fire({
-        text: "passwords do not match",
-        target: "#custom-target",
-        customClass: {
-          container: "position-absolute",
-        },
-        toast: true,
-        position: "top-right",
-      });
+      alert("passwords do not match");
       return;
     }
 
@@ -50,12 +43,7 @@ const SignUpForm = () => {
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        Swal.fire({
-          title: "Warning!",
-          text: "Cannot create user, email already in use",
-          icon: "warning",
-          confirmButtonText: "Back",
-        });
+        alert("Cannot create user, email already in use");
       } else {
         console.log("user creation encountered an error", error);
       }
@@ -69,7 +57,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -108,9 +96,9 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button type="submit">Save</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
